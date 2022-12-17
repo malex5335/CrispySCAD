@@ -42,7 +42,7 @@ font_size = 5;
 // a higher value means a cleaner text
 font_detail = 25;
 // heights of each keycap based on row
-heights = [17, 15, 13, 11, 19];
+heights = [17, 15, 13, 13, 19];
 // front angles of each keycap based on row
 angles_front = [17, 10, 10, 10, 12];
 // back angles of each keycap based on row
@@ -194,7 +194,7 @@ module printText() {
     angle_top = angles_top[index];
     padding_left = 2;
     padding_right = 2;
-    padding_top = 4.5;
+    padding_top = 4;
     padding_bottom = -3;
     padding_front = -0.5;
     corner_pos = -(unit*size)/2;
