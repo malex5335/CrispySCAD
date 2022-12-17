@@ -15,7 +15,7 @@
  *  4
  */
 // the row (1-5) where the keycap will be placed according to DCS-Standard
-row = 2;
+row = 4;
 text_top_left = "";
 text_top_center = "Q";
 text_top_right = "";
@@ -24,9 +24,9 @@ text_bottom_center = "";
 text_bottom_right = "@";
 text_front_center = "<<";
 // the size in units i.e.: 1.25, 2.75
-size = 1;
+size = 6.25;
 // true if you want a bump instead of a curve
-convex = false;
+convex = true;
 // will generate an iso enter key, ignoring the size
 iso_enter = false;
 // size of 1 unit in mm
@@ -65,7 +65,6 @@ $fn = 100; // number of facets; bigger number = smoother edges
 engravedCap();
 cherryStem();
 supportStem();
-
 module engravedCap() {
     width = unit * size;
     depth = unit;
@@ -73,7 +72,7 @@ module engravedCap() {
     difference() {
         difference() {
             angledCap(width, depth, height);
-            translate([0, 0, -top_thickness]) {
+            translate([0, 0, - top_thickness]) {
                 angledCap(width, depth, height, - wall_thickness);
             }
         }
