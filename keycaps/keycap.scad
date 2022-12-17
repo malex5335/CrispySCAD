@@ -15,7 +15,7 @@
  *  4
  */
 // the row (1-5) where the keycap will be placed according to DCS-Standard
-row = 4;
+row = 1;
 text_top_left = "";
 text_top_center = "Q";
 text_top_right = "";
@@ -24,7 +24,7 @@ text_bottom_center = "";
 text_bottom_right = "@";
 text_front_center = "<<";
 // the size in units i.e.: 1.25, 2.75
-size = 6.25;
+size = 1;
 // true if you want a bump instead of a curve
 convex = true;
 // will generate an iso enter key, ignoring the size
