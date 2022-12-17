@@ -22,11 +22,15 @@ text_top_right = "";
 text_bottom_left = "か";
 text_bottom_center = "";
 text_bottom_right = "@";
+text_front_left = "";
 text_front_center = "<<";
+text_front_right = "";
 // the size in units i.e.: 1.25, 2.75
-size = 1;
+size = 2.75;
 // true if you want a bump instead of a curve
 convex = false;
+// rotates the convex effect by 90° (used for spacebar)
+convex_rotated = false;
 // will generate an iso enter key, ignoring the size
 iso_enter = false;
 // size of 1 unit in mm
@@ -132,12 +136,12 @@ module angledCap(width, depth, height, inner=0) {
             }
         }
         if(convex) {
-            diameter = pow(size, 3)*50;
+            diameter = convex_rotated ? 50 : pow(size, 3)*50;
             magic_number = -diameter/2 + heights[index]*0.15;
             // cylinder top
-            rotate([angle_top+90,0,180]) {
+            rotate([90 + (convex_rotated ? 0 : angle_top),0,180-(convex_rotated ? 90 : 0)]) {
                 translate([0,magic_number,0]) { // 2.42 -> 2.01429
-                    cylinder(d=diameter, h=height*2, $fn=200, center=true);
+                    cylinder(d=diameter, h=convex_rotated ? size*unit : height*2, $fn=200, center=true);
                 }
             }
         }
@@ -158,7 +162,7 @@ module cherryStem() {
             diameter = pow(size, 3)*50;
             angle_top = angles_top[index];
             // cylinder top
-            rotate([angle_top+90,0,180]) {
+            rotate([angle_top+90,0,180-(convex_rotated ? 90 : 0)]) {
                 translate([0,diameter/2 +  cos(angle_top)-0.5,-unit/2]) {
                     cylinder(d=diameter, h=unit, $fn=200);
                 }
@@ -175,7 +179,7 @@ module supportStem() {
         translate([-2*stem_stud_diameter, 0, 0]) {
             cherryStem();
         }
-    } else if(size == 6.25) {
+    } else if(size >= 6.25) {
         translate([50, 0, 0]) {
             cherryStem();
         }
@@ -186,69 +190,93 @@ module supportStem() {
 }
 
 module printText() {
-    padding = 2.4;
-    corner_pos = -(unit*size)/ 2;
-    letter_height = 10;
     index = row-1;
     angle_top = angles_top[index];
-    circle_degree = pow(size, 3)*50 / 8;
-    strong_angle = 0;
+    padding_left = 2;
+    padding_right = 2;
+    padding_top = 4.5;
+    padding_bottom = -3;
+    padding_front = -0.5;
+    corner_pos = -(unit*size)/2;
+    side_buffer = size+3.3;
+    letter_height = 10;
+    circle_degree = 8;
     letter_degree = convex ? -circle_degree : circle_degree;
-    zPos = (convex ? 1.1 : 1.6) - sqrt(abs(angle_top))*0.1;
+    angle_convex_div = angle_top*0.03;
+    zPos = (convex ? 2.1 : 0.5) - sqrt(abs(angle_top))*0.1;
     // left
-    translate([corner_pos + padding, padding/5,zPos - strong_angle]) {
+    translate([corner_pos + padding_left*(side_buffer), padding_top,(convex ? zPos-angle_convex_div*5 : zPos-angle_convex_div)]) {
         rotate([-angle_top,letter_degree,0])  {
             linear_extrude(height=letter_height) {
-                    text(text=text_top_left, size=font_size, font=font, halign="left", valign="bottom", $fn = font_detail);
+                    text(text=text_top_left, size=font_size, font=font, halign="right", valign="center", $fn = font_detail);
             }
         }
     }
-    translate([corner_pos + padding,-padding/5,zPos + strong_angle]) {
+    translate([corner_pos + padding_left*(side_buffer),padding_bottom,(convex ? zPos : zPos+angle_convex_div)]) {
         rotate([-angle_top,letter_degree,0])  {
             linear_extrude(height=letter_height) {
-                    text(text=text_bottom_left, size=font_size, font=font, halign="left", valign="top", $fn = font_detail);
+                    text(text=text_bottom_left, size=font_size, font=font, halign="right", valign="center", $fn = font_detail);
             }
         }
     }
 
     // center
-    translate([0, padding/2,(convex ? zPos : zPos-0.5) - strong_angle]) {
+    translate([0, padding_top,(convex ? zPos-angle_convex_div*5 : zPos-angle_convex_div)]) {
         rotate([-angle_top,0,0])  {
             linear_extrude(height=letter_height) {
-                text(text = text_top_center, size = font_size, font = font, halign = "center", valign = "bottom", $fn = font_detail);
+                text(text = text_top_center, size = font_size, font = font, halign = "center", valign = "center", $fn = font_detail);
             }
         }
     }
-    translate([0,-padding/2,(convex ? zPos : zPos-0.5) + strong_angle]) {
+    translate([0,padding_bottom,(convex ? zPos : zPos+angle_convex_div)]) {
         rotate([-angle_top,0,0])  {
             linear_extrude(height=letter_height) {
-                text(text = text_bottom_center, size = font_size, font = font, halign = "center", valign = "top", $fn = font_detail);
+                text(text = text_bottom_center, size = font_size, font = font, halign = "center", valign = "center", $fn = font_detail);
             }
         }
     }
     // right
-    translate([-corner_pos - padding,padding/5,zPos - strong_angle]) {
+    translate([-corner_pos - padding_right*(side_buffer),padding_top,(convex ? zPos-angle_convex_div*5 : zPos-angle_convex_div)]) {
         rotate([-angle_top,-letter_degree,0])  {
             linear_extrude(height=letter_height) {
-                text(text = text_top_right, size = font_size, font = font, halign = "right", valign = "bottom", $fn = font_detail);
+                text(text = text_top_right, size = font_size, font = font, halign = "left", valign = "center", $fn = font_detail);
             }
         }
     }
-    translate([-corner_pos-padding,-padding/5,zPos + strong_angle]) {
+    translate([-corner_pos-padding_right*(side_buffer),padding_bottom,(convex ? zPos : zPos+angle_convex_div)]) {
         rotate([-angle_top,-letter_degree,0])  {
             linear_extrude(height=letter_height) {
-                text(text = text_bottom_right, size = font_size, font = font, halign = "right", valign = "top", $fn = font_detail);
+                text(text = text_bottom_right, size = font_size, font = font, halign = "left", valign = "center", $fn = font_detail);
             }
         }
     }
     // front
     angle_front = angles_front[index];
     distance_top = abs(angle_top)*0.1;
-    translate([0,0.2,(angle_top > 0 ? distance_top : -distance_top)-0.5]){
+
+    translate([corner_pos/1.5 + padding_left,padding_front+0.5,(angle_top > 0 ? distance_top : -distance_top) + padding_front*2.5]){
         translate([0,-7,0]) {
             rotate([90-angle_front,0,0])
                 linear_extrude(height=letter_height) {
-                    text(text = text_front_center, size = font_size-2, font = font, halign = "center", valign = "top", $fn = font_detail);
+                    text(text = text_front_left, size = font_size-2, font = font, halign = "right", valign = "center", $fn = font_detail);
+                }
+        }
+    }
+    
+    translate([0,padding_front+0.5,(angle_top > 0 ? distance_top : -distance_top) + padding_front*2.5]){
+        translate([0,-7,0]) {
+            rotate([90-angle_front,0,0])
+                linear_extrude(height=letter_height) {
+                    text(text = text_front_center, size = font_size-2, font = font, halign = "center", valign = "center", $fn = font_detail);
+                }
+        }
+    }
+
+    translate([-corner_pos/1.5 - padding_right,padding_front+0.5,(angle_top > 0 ? distance_top : -distance_top) + padding_front*2.5]){
+        translate([0,-7,0]) {
+            rotate([90-angle_front,0,0])
+                linear_extrude(height=letter_height) {
+                    text(text = text_front_right, size = font_size-2, font = font, halign = "left", valign = "center", $fn = font_detail);
                 }
         }
     }
