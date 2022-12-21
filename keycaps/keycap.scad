@@ -26,7 +26,7 @@ text_front_left = "";
 text_front_center = "<<";
 text_front_right = "";
 // the size in units i.e.: 1.25, 2.75
-size = 2.75;
+size = 1;
 // true if you want a bump instead of a curve
 convex = false;
 // rotates the convex effect by 90° (used for spacebar)
