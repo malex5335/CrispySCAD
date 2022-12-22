@@ -1,5 +1,20 @@
 include <../basic_forms/math_forms.scad>
 
+module br_name(size = 10, height = 2, split_line = false) {
+    linear_extrude(height = height) {
+        if(split_line) {
+            ci_text("B   LTIC", size);
+            letter_a(0.9 * size, size);
+            translate([-size/10, -size * 1.3, 0]) {
+                ci_text("ROCKS", size);
+            }
+        } else {
+            ci_text("B   LTIC ROCKS", size);
+            letter_a(3.24 * size, size);
+        }
+    }
+}
+
 module br_logo(size = 10, height = 2, name = true, slogan = true) {
     width = size * 0.15;
     width_bias = 0.56;
@@ -34,7 +49,6 @@ module logo_text(size, height, name, slogan) {
         linear_extrude(height = height) {
             y_translate = - size / 3;
             font_size = size / 10;
-            font_detail = 50;
             if (name) {
                 translate([0, y_translate, 0]) {
                     ci_text("B   LTIC ROCKS", font_size);
@@ -61,6 +75,6 @@ module letter_a(left_correction, font_size) {
     }
 }
 
-module ci_text(content, font_size) {
-    text(content, font="Roboto:style=Black Italic", size=font_size, halign = "center", valign="center", $fn=50);
+module ci_text(content, font_size, font_detail = 50) {
+    text(content, font="Roboto:style=Black Italic", size=font_size, halign = "center", valign="center", $fn=font_detail);
 }
