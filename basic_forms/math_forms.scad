@@ -27,7 +27,14 @@ module parallelogram(width = 10, length = 10, height = 2, distortion = 5) {
             [5,6,2,1],  // right
             [6,7,3,2],  // back
             [7,4,0,3]   // left
-        ];
+    ];
 
     polyhedron( CubePoints, CubeFaces );
+}
+
+module hollow_cylinder(diameter = 10, height = 10, wall_thickness = 2, detail = 100) {
+    difference() {
+        cylinder(d = diameter, h = height, center = false, $fn = detail);
+        cylinder(d = diameter - wall_thickness * 2, h = height, center = false, $fn = detail);
+    }
 }
