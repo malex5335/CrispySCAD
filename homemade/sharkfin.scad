@@ -25,7 +25,7 @@ module fin(length = 10, height = 2) {
     }
 }
 
-module fin_holder(diameter = 12, height = 3, opening = 7) {
+module fin_holder(diameter = 13, height = 3, opening = 7) {
     difference() {
         hollow_cylinder(diameter = diameter, height = height, wall_thickness = 1);
         rotate([0,0,90]) {
