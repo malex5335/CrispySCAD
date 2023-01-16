@@ -44,6 +44,7 @@ module gpu_extension(height) {
             length = length,
             z_diff = 0);
         remove_options(width, length, height);
+        mirroring_side_panels_style(height);
     }
 }
 
@@ -164,6 +165,45 @@ module remove_options(width, length, height) {
             translate([96 ,22,0]) {
                 roundedcube(size = [44- side_spacer,155,height], radius = 5);
             }
+        }
+    }
+}
+
+module mirroring_side_panels_style(height) {
+    total_length = 244;
+    total_width = 140;
+    side_panel_height = 16;
+    carving_length = 187;
+    thickness = 1.8;
+    translate([0,(total_length - carving_length) / 2,height - side_panel_height]){
+        side_panel(carving_length, side_panel_height, thickness);
+    }
+    translate([total_width - thickness,(total_length - carving_length) / 2,height-side_panel_height]){
+        side_panel(carving_length, side_panel_height, thickness);
+    }
+}
+
+module side_panel(carving_length, depth, thickness){
+    triangle_length = depth;
+    translate([0,triangle_length,0]) {
+        cube_length = carving_length - triangle_length * 2;
+        rotate([90,-90,90]) {
+            rectangular_triangle(triangle_length, thickness);
+        }
+        cube([thickness,cube_length,depth]);
+        translate([0,cube_length + triangle_length,triangle_length]) {
+            rotate([90,180,90]) {
+                rectangular_triangle(triangle_length, thickness);
+            }
+        }
+    }
+}
+
+module rectangular_triangle(length, thickness) {
+    difference() {
+        cube([length, length, thickness]);
+        rotate([0,0,45]) {
+            cube([length*2, length, thickness]);
         }
     }
 }
