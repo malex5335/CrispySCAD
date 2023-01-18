@@ -4,27 +4,55 @@ length = 2;
 socket_height = 5.8;
 // distance from the outside, to fit GPU width in mm
 side_spacer = 5.1;
+// split model in 2 parts for smaller printers
+split_model = true;
+// detail
+$fn = 50;
+// don't change, 140 is default value
+width = 140;
+// don't change, 244 is default value
+height = 244;
 
-gpu_extension(length * 10);
+whole_model(length, split_model);
 
-module gpu_extension(height) {
-    height = max(height, 20);
-    $fn = 50;
-    width = 140;
-    length = 244;
+module whole_model(length, split_model) {
+    true_length = length * 10;
+    if(split_model) {
+        // top part
+        translate([20, -50, 0]) {
+            difference() {
+                gpu_extension(true_length);
+                cube([width,height/2,true_length + 10]);
+            }
+        }
+        // bottom part
+        difference() {
+            gpu_extension(true_length);
+            translate([0, height / 2, 0]) {
+                cube([width,height/2,true_length + 10]);
+            }
+            
+        }
+    } else {
+        gpu_extension(true_length);
+    }
+}
+
+module gpu_extension(length) {
+    length = max(length, 20);
     difference() {
         union(){
-            cube([width, length, height]);
+            cube([width, height, length]);
             // stub top
             translate([ width/2,
-                        length-16,
-                        height]) {
+                        height-16,
+                        length]) {
                 stub_stem();
             }
             // stub bottom
             translate([ width/2,
                         16,
-                        height]) {
+                        length]) {
                 stub_stem();
             }
         }
@@ -32,19 +60,19 @@ module gpu_extension(height) {
             side_distance = 22,
             top_distance = 16,
             width = width,
-            length = length,
-            z_diff = height);
+            length = height,
+            z_diff = length);
         translate([side_spacer, 22, 0]) {
-            gpu_space(height);
+            gpu_space(length);
         }
         sockets(
             side_distance = 22,
             top_distance = 16,
             width = width,
-            length = length,
+            length = height,
             z_diff = 0);
-        remove_options(width, length, height);
-        mirroring_side_panels_style(height);
+        remove_options(width, height, length);
+        mirroring_side_panels_style(length);
     }
 }
 
@@ -179,7 +207,7 @@ module mirroring_side_panels_style(height) {
         side_panel(carving_length, side_panel_height, thickness);
     }
     translate([total_width - thickness,(total_length - carving_length) / 2,height-side_panel_height]){
-        side_panel(carving_length, side_panel_height, thickness);
+        side_panel(carving_length, side_panel_height, thickness + 0.2);
     }
 }
 
