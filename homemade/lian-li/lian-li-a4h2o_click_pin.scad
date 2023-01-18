@@ -21,11 +21,11 @@ module click_stem() {
     }
     rect_size = 3;
     translate([(inner_size - stem_width ) / 2 - rect_size, 0.5, 0]) {
-        #rectangular_triangle(rect_size, height);
+        rectangular_triangle(rect_size, height);
     }
     translate([(inner_size + stem_width) / 2 , rect_size+0.5, 0]) {
         rotate([0,0,270]) {
-            #rectangular_triangle(rect_size, height);
+            rectangular_triangle(rect_size, height);
         }
     }
 }
