@@ -8,7 +8,7 @@ difference() {
     }
     translate([0,2,-height/6]) {
         rotate([0,180,0]) {
-            br_name(size=4, height=height, split_line=true);
+            br_name(size=3.5, height=height, split_line=true);
         }
     }
 }
