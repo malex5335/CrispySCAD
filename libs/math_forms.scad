@@ -39,15 +39,16 @@ module hollow_cylinder(diameter = 10, height = 10, wall_thickness = 2, detail = 
     }
 }
 
-module roundedcube(size = [1,1,1], radius = 3) {
+module roundedcube(size = [1,1,1], radius = 5) {
+    radius = min(size[0]/2-0.01, size[1]/2-0.01, radius);
     minkowski() {
         diameter = radius * 2;
         cube([
-            size[0] - diameter,
-            size[1] - diameter,
-            size[2]]);
+                size[0] - diameter,
+                size[1] - diameter,
+                size[2]/2]);
         translate([radius,radius]) {
-            cylinder(r=radius,h=size[2]);
+            cylinder(r=radius,h=size[2]/2);
         }
     }
 }
