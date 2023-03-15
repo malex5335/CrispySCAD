@@ -72,7 +72,7 @@ module gpu_extension(length) {
             length = height,
             z_diff = 0);
         remove_options(width, height, length);
-        mirroring_side_panels_style(length);
+        #mirroring_side_panels_style(length);
     }
 }
 
@@ -201,7 +201,7 @@ module mirroring_side_panels_style(height) {
     total_length = 244;
     total_width = 140;
     side_panel_height = 16;
-    carving_length = 187;
+    carving_length = 183.5;
     thickness = 1.8;
     translate([0,(total_length - carving_length) / 2,height - side_panel_height]){
         side_panel(carving_length, side_panel_height, thickness);
