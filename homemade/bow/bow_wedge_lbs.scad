@@ -1,5 +1,5 @@
 // false if to use custom sizes
-use_predefined_lbs = true;
+use_predefined_lbs = false;
 // text label and predefines variables (available: 35)
 lbs = 35;
 // width of the grove in the bow-arm where the body rests
