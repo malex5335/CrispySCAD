@@ -1,7 +1,7 @@
 // false if to use custom sizes
 use_predefined_lbs = true;
 // text label and predefines variables (available: 35, 37, 38, 40, 42, 44, 46, 50, 51, 54, 57, 59, 61)
-lbs = 57;
+lbs = 58;
 // width of the grove in the bow-arm where the body rests
 height = 20.5;
 // arm length up to screw on the inner side
@@ -154,11 +154,11 @@ measurements = [
     ["57_text_angle", 35.2],
     ["57_text_lift", 1.2],
 
-    ["59_width_1", 4.6],
-    ["59_width_2", 4.6],
-    ["59_text_size", 4],
-    ["59_text_angle", 41],
-    ["59_text_lift", 1.2],
+    ["58_width_1", 4.6],
+    ["58_width_2", 4.6],
+    ["58_text_size", 4],
+    ["58_text_angle", 41],
+    ["58_text_lift", 1.2],
 
     ["61_width_1", 3.6],
     ["61_width_2", 3.6],
