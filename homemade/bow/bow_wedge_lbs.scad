@@ -1,7 +1,7 @@
 // false if to use custom sizes
-use_predefined_lbs = false;
-// text label and predefines variables (available: 32, 35, 39, 40, 43, 45, 49, 50, 55, 60)
-lbs = 39;
+use_predefined_lbs = true;
+// text label and predefines variables (available: 35, 37, 38, 40, 42, 44, 46, 50, 51, 54, 57, 59, 61)
+lbs = 57;
 // width of the grove in the bow-arm where the body rests
 height = 20.5;
 // arm length up to screw on the inner side
@@ -88,23 +88,23 @@ function getKey(key) = str(lbs,"_",key);
 
 measurements = [
 
-    ["32_width_1", 13.8],
-    ["32_width_2", 15.6],
-    ["32_text_size", 10],
-    ["32_text_angle", 14.5],
-    ["32_text_lift", 0.3],
-
-    ["35_width_1", 13],
-    ["35_width_2", 15],
+    ["35_width_1", 13.8],
+    ["35_width_2", 15.6],
     ["35_text_size", 10],
-    ["35_text_angle", 15],
+    ["35_text_angle", 14.5],
     ["35_text_lift", 0.3],
 
-    ["39_width_1", 12.2],
-    ["39_width_2", 14.3],
-    ["39_text_size", 10],
-    ["39_text_angle", 15.55],
-    ["39_text_lift", 0.3],
+    ["37_width_1", 13],
+    ["37_width_2", 15],
+    ["37_text_size", 10],
+    ["37_text_angle", 15],
+    ["37_text_lift", 0.3],
+
+    ["38_width_1", 12.2],
+    ["38_width_2", 14.3],
+    ["38_text_size", 10],
+    ["38_text_angle", 15.55],
+    ["38_text_lift", 0.3],
 
     ["40_width_1", 11.7],
     ["40_width_2", 13.6],
@@ -112,39 +112,57 @@ measurements = [
     ["40_text_angle", 16.4],
     ["40_text_lift", 0.3],
 
-    ["43_width_1", 10.1],
-    ["43_width_2", 11.5],
-    ["43_text_size", 9],
-    ["43_text_angle", 19.5],
-    ["43_text_lift", 0.3],
+    ["42_width_1", 10.91],
+    ["42_width_2", 12.6],
+    ["42_text_size", 10],
+    ["42_text_angle", 17.5],
+    ["42_text_lift", 0.3],
 
-    ["45_width_1", 9.3],
-    ["45_width_2", 10.5],
-    ["45_text_size", 7],
-    ["45_text_angle", 21],
-    ["45_text_lift", 0.3],
+    ["44_width_1", 10.1],
+    ["44_width_2", 11.5],
+    ["44_text_size", 9],
+    ["44_text_angle", 19.5],
+    ["44_text_lift", 0.3],
 
-    ["49_width_1", 7.8],
-    ["49_width_2", 8.6],
-    ["49_text_size", 7],
-    ["49_text_angle", 25],
-    ["49_text_lift", 0.5],
+    ["46_width_1", 9.3],
+    ["46_width_2", 10.5],
+    ["46_text_size", 7],
+    ["46_text_angle", 21],
+    ["46_text_lift", 0.3],
 
-    ["50_width_1", 7.4],
-    ["50_width_2", 8.1],
-    ["50_text_size", 6],
-    ["50_text_angle", 27.2],
+    ["50_width_1", 7.8],
+    ["50_width_2", 8.6],
+    ["50_text_size", 7],
+    ["50_text_angle", 25],
     ["50_text_lift", 0.5],
 
-    ["55_width_1", 5.5],
-    ["55_width_2", 5.7],
-    ["55_text_size", 4],
-    ["55_text_angle", 35.2],
-    ["55_text_lift", 1.2],
+    ["51_width_1", 7.4],
+    ["51_width_2", 8.1],
+    ["51_text_size", 6],
+    ["51_text_angle", 27.2],
+    ["51_text_lift", 0.5],
 
-    ["60_width_1", 3.6],
-    ["60_width_2", 3.6],
-    ["60_text_size", 4],
-    ["60_text_angle", 50],
-    ["60_text_lift", 1.2],
+    ["54_width_1", 6.5],
+    ["54_width_2", 6.9],
+    ["54_text_size", 5],
+    ["54_text_angle", 30.7],
+    ["54_text_lift", 1.2],
+
+    ["57_width_1", 5.5],
+    ["57_width_2", 5.7],
+    ["57_text_size", 4],
+    ["57_text_angle", 35.2],
+    ["57_text_lift", 1.2],
+
+    ["59_width_1", 4.6],
+    ["59_width_2", 4.6],
+    ["59_text_size", 4],
+    ["59_text_angle", 41],
+    ["59_text_lift", 1.2],
+
+    ["61_width_1", 3.6],
+    ["61_width_2", 3.6],
+    ["61_text_size", 3.5],
+    ["61_text_angle", 50],
+    ["61_text_lift", 1.2],
 ];
