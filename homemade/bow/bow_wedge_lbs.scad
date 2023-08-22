@@ -1,7 +1,7 @@
 // false if to use custom sizes
 use_predefined_lbs = true;
-// text label and predefines variables (available: 35, 37, 38, 40, 42, 44, 46, 50, 51, 54, 57, 59, 61)
-lbs = 58;
+// text label and predefines variables (available: 35, 37, 38, 40, 42, 44, 46, 50, 51, 54, 57, 58, 61)
+lbs = 35;
 // width of the grove in the bow-arm where the body rests
 height = 20.5;
 // arm length up to screw on the inner side
@@ -9,15 +9,15 @@ depth_1 = 13.0;
 // body length up to screw on the inner side
 depth_2 = 17.0;
 // visible screw length between arm and body
-width_1 = 12.2;
+width_1 = 13.8;
 // longest distance between bow-arm and body
-width_2 = 14.3;
+width_2 = 15.6;
 // font size of the lbs text (more lbs = lower number)
 text_size = 10;
 // change if text is not visible (more lbs = higher number)
-text_angle = 15.55;
+text_angle = 14.5;
 // how many millimeters to lift the label
-text_lift = 0;
+text_lift = 0.3;
 
 if(use_predefined_lbs) {
     wedge();
@@ -35,10 +35,10 @@ if(use_predefined_lbs) {
 }
 
 module wedge(
-    height = 20.5,
-    depth_1 = 13.0,
+    height = height,
+    depth_1 = depth_1,
     width_1 = getValue("width_1", measurements),
-    depth_2 = 17.0,
+    depth_2 = depth_2,
     width_2 = getValue("width_2", measurements),
     text_size = getValue("text_size", measurements),
     text_angle = getValue("text_angle", measurements),
@@ -79,7 +79,6 @@ module wedge(
     }
 }
 
-
 function getValue(key, map) = map[getTuple(getKey(key),map)][1];
 
 function getTuple(key, map) = search([key],map)[0];
@@ -87,7 +86,6 @@ function getTuple(key, map) = search([key],map)[0];
 function getKey(key) = str(lbs,"_",key);
 
 measurements = [
-
     ["35_width_1", 13.8],
     ["35_width_2", 15.6],
     ["35_text_size", 10],
