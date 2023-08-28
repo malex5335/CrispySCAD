@@ -7,6 +7,9 @@ shield_height = 1;
 $fn = 90;
 
 set();
+// rod_wrapper(true);
+// rod_wrapper(false);
+// shield();
 
 module set() {
     rod_wrapper(true);
