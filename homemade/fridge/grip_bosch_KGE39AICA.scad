@@ -1,12 +1,12 @@
 screw_hole = 4;
-screw_head = 7;
-length = 300;
+screw_head = 9;
+length = 310;
 width = 20;
-depth = 70;
-thickness = 10;
+depth = 65;
+thickness = 12;
 buffer_top = 15;
 buffer_left = 5;
-two_pieces = true;
+two_pieces = false;
 connector_length = 20;
 connector_clearence = 0.05;
 
