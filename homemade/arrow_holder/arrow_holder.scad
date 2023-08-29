@@ -1,42 +1,21 @@
 length = 240;
 rod_diameter = 6;
 connector_diameter = 2;
-connector_height = 5;
+connector_height = 30;
 shield_diameter = 30;
 shield_height = 1;
-$fn = 90;
+$fn = 50;
+use_spikes = true;
+fitting_scale = 1.05;
 
-set();
-// rod_wrapper(true);
-// rod_wrapper(false);
-// shield();
+// set();
+// rod();
+shield(true);
 
 module set() {
-    rod_wrapper(true);
+    rod();
     translate([shield_diameter*1.05,0,0]) {
-        rod_wrapper(false);
-    }
-    translate([0,shield_diameter*1.05,0]) {
-        shield();
-        translate([shield_diameter*1.05,0,0]) {
-            shield();
-        }
-    }
-}
-
-module rod_wrapper(top_part=true) {
-    if(top_part)  {
-        difference() {
-        rod();
-            translate([0,0,length-connector_height]) {
-                connector();
-            }
-        }
-    } else {
-        rod();
-        translate([0,0,length]) {
-            connector();
-        }
+        shield(true);
     }
 }
 
@@ -46,6 +25,7 @@ module rod(with_shield=true) {
         cube_size = rod_diameter/4;
         cube_distance = rod_diameter/2-cube_size/2;
         translate([0,0,length/2]) {
+            
             translate([0,cube_distance,0]) {
                 cube([cube_size,cube_size,length], center=true);
             }
@@ -62,25 +42,31 @@ module rod(with_shield=true) {
     }
     if(with_shield) {
         shield();
+        translate([0,0,length-connector_height/2]) {
+            //shield();
+        }
     }
 }
 
-module shield() {
+module shield(removeable=false) {
     difference() {
         union() {
             cylinder(d = shield_diameter, h = shield_height, center = false);
+            if(use_spikes) {
             spikes();
-            rotate([0,0,45]) {
-                spikes();
+                rotate([0,0,45]) {
+                    spikes();
+                }
             }
         }
-        rod(with_shield=false);
-    }
-}
-
-module connector() {
-    translate([0,0,connector_height/2]) {
-        cylinder(d = connector_diameter, h = connector_height, center = true);
+        if(removeable) {
+            scale([fitting_scale,1,1]) {
+                rod(false);
+            }
+            scale([1,fitting_scale,1]) {
+                rod(false);
+            }
+        }
     }
 }
 
