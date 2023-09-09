@@ -8,6 +8,14 @@ $fn = 50;
 width = 240;
 // don't change, 325 is default value
 height = 325;
+// distance of the top right socket from outer edge
+top_right_distance = 59;
+// distance of the top left socket from outer edge
+top_left_distance = 44;
+// distance of the bottom right socket from outer edge
+bottom_right_distance = 11;
+// distance of the bottom left socket from outer edge
+bottom_left_distance = 8;
 
 whole_model(length*10);
 
@@ -44,12 +52,12 @@ module panel(length) {
 module sockets() {
     // top
     translate([width-9,0,0]) {
-        translate([0,95,0]) {
+        translate([0,top_right_distance,0]) {
             rotate([0,0,90]) {
                 click_socket();
             }
         }
-        translate([0,height-44,0]) {
+        translate([0,height-top_left_distance,0]) {
             rotate([0,0,90]) {
                 click_socket();
             }
@@ -57,10 +65,10 @@ module sockets() {
     }
     // bottom
     translate([26,0,0]) {
-        translate([0,11,0]) {
+        translate([0,bottom_right_distance,0]) {
             click_socket();
         }
-        translate([0,height-8,0]) {
+        translate([0,height-bottom_left_distance,0]) {
             click_socket();
         }
     }
