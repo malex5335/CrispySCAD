@@ -1,6 +1,6 @@
-border_width = 2;
-inner_width = 65;
-inner_depth = 40;
+border_width = 3;
+inner_width = 66;
+inner_depth = 40.8;
 height = 1;
 
 union() {
@@ -14,9 +14,11 @@ union() {
 }
 
 module inner_ring() {
-    difference() {
-        cube([inner_width,inner_depth,height], true);
-        cube([inner_width-border_width,inner_depth-border_width,height], true);
+    translate([0,0,-2]) {
+        difference() {
+            cube([inner_width,inner_depth,5], true);
+            cube([inner_width-border_width,inner_depth-border_width,5], true);
+        }
     }
 }
 
