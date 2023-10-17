@@ -1,4 +1,4 @@
-border_width = 3;
+border_width = 4;
 inner_width = 66;
 inner_depth = 40.8;
 height = 1;
@@ -14,10 +14,22 @@ union() {
 }
 
 module inner_ring() {
+   ring_height = 5;
     translate([0,0,-2]) {
         difference() {
-            cube([inner_width,inner_depth,5], true);
-            cube([inner_width-border_width,inner_depth-border_width,5], true);
+            cube([inner_width,inner_depth,ring_height], true);
+            cube([inner_width-border_width,inner_depth-border_width,ring_height], true);
+            
+            translate([inner_width/2,inner_depth/2,0]) {
+                rotate([0,0,45]) {
+                    #cube(ring_height, true);
+                }
+            }
+            translate([-inner_width/2,inner_depth/2,0]) {
+                rotate([0,0,45]) {
+                    #cube(ring_height, true);
+                }
+            }
         }
     }
 }
