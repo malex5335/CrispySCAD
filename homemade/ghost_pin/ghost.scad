@@ -4,11 +4,11 @@ eye_distance = 12;
 head_diameter = 28;
 height = 10;
 feet_size = 7;
-wall = 1;
+wall = 2;
 
 difference() {
     ghost();
-    translate([0,0,1]) {
+    translate([0,0,wall]) {
         ghost(head_diameter-wall*2,4);
     }
 }
