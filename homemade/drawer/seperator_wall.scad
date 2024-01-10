@@ -1,15 +1,15 @@
 width = 157;
 height = 160;
-wall_thickness = 5;
-connector_depth = 8;
-wall_depth = 10;
+wall_thickness = 10;
+wall_depth = 15;
+connector_depth = wall_depth*0.8;
 
 difference() {
     cube([wall_thickness,width,height], true);
-    translate([0,-(width/2-wall_depth/2),0]) {
+    translate([0,-(width/2-wall_depth),0]) {
         connector();
     }
-    translate([0,(width/2-wall_depth/2),0]) {
+    translate([0,(width/2-wall_depth),0]) {
         rotate([0,0,180]) {
             connector();
         }
@@ -19,7 +19,7 @@ difference() {
 module connector() {
     connector_thickness = wall_thickness * 0.5;
     wall_diff = connector_thickness*0.2;
-    translate([-connector_thickness/2,-wall_depth/2,-height/2]) {
+    translate([-connector_thickness/2,-wall_depth,-height/2]) {
         difference() {
             cube([connector_thickness,wall_depth,height]);
             cube([wall_diff,connector_depth,height]);
@@ -27,7 +27,7 @@ module connector() {
                 cube([wall_diff,connector_depth,height]);
             }
             triangle_rad = 1.15;
-            translate([0,connector_depth + triangle_rad/(wall_diff*2),0]) {
+            translate([0,connector_depth + triangle_rad/(wall_diff*2.1),0]) {
                 triangle(height, triangle_rad);
                 translate([connector_thickness,0,0]) {
                     triangle(height, triangle_rad);
