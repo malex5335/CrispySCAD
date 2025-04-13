@@ -1,4 +1,4 @@
-height=32;
+height=18;
 diameter=60;
 screwBodyDiameter=4;
 screwHeadDiameter=9;
