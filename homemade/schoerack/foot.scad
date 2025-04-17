@@ -3,7 +3,7 @@ diameter=60;
 screwBodyDiameter=4;
 screwHeadDiameter=9;
 screwPlatformHeight=3;
-rotation=3;
+rotation=1;
 
 difference() {
     $fn=100;
