@@ -1,9 +1,9 @@
 // should match the outer diameter of Your jar opening
-outer_diameter = 50;
+outer_diameter = 42;
 // should match the outer diameter of Your jar opening minus the thickness of it's wall
-inner_diameter = 47;
+inner_diameter = 35;
 // how deep this insert will go into Your jar
-height = 15;
+height = 8;
 // how many circles of holes (additionally to 1 in the middle) will be created
 hole_circles = 2;
 // how far apart the circles will be created to each other
